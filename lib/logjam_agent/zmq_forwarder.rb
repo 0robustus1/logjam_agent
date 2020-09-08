@@ -69,9 +69,6 @@ module LogjamAgent
     def forward(data, options={})
       app_env = options[:app_env] || @app_env
       key = options[:routing_key] || "logs.#{app_env.sub('-','.')}"
-      if engine = options[:engine]
-        key += ".#{engine}"
-      end
       msg = LogjamAgent.encode_payload(data)
       @socket_mutex.synchronize do
         if options[:sync]

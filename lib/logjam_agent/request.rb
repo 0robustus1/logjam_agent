@@ -105,9 +105,8 @@ module LogjamAgent
 
     def forward
       return if @ignored || LogjamAgent.disabled
-      engine = @fields.delete(:engine)
       sync = @fields.delete(:sync)
-      @forwarder.forward(@fields, :engine => engine, :sync => sync)
+      @forwarder.forward(@fields, :sync => sync)
     rescue Exception => e
       handle_forwarding_error(e)
     end
